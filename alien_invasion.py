@@ -1,12 +1,18 @@
 import sys
 import pygame
+from settings import Settings #импортируем настройки из settings.py
+
 
 class AlienInvasion:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((1200, 800))
+        self.stgs = Settings()# используем класс с настройками
+        #self.screen = pygame.display.set_mode((1200, 800))
+        self.screen = pygame.display.set_mode((self.stgs.scr_wh, self.stgs.scr_ht))
+
         pygame.display.set_caption("Alien Invasion")
-        self.bg_color = (230, 230,230) #меняем цвет фона
+        #self.bg_color = (230, 230,230) #меняем цвет фона
+        self.bg_color = self.stgs.bg_cr
 
     def run_game(self):
         """Основной цикл игры"""
