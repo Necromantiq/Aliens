@@ -10,11 +10,12 @@ class AlienInvasion:
         """Initialize the game, and create game resources."""
         pygame.init()
         self.settings = Settings()
-
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        self.ship = Ship(self)
+        # Флаг перемещения
+        self.moving_right = False
         pygame.display.set_caption("Alien Invasion")
 
-        self.ship = Ship(self)
     
     def _check_events(self):
         for event in pygame.event.get():
@@ -26,6 +27,12 @@ class AlienInvasion:
                         self.ship.rect.x += 10
                     if event.key == pygame.K_LEFT:
                         self.ship.rect.x -= 10
+
+    def update(self):
+        """Обновляет позицию корабля с учетом флага."""
+        if self.moving_right:
+            self.rect.x += 1
+
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
